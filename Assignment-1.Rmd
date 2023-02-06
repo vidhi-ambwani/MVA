@@ -1,0 +1,116 @@
+---
+title: "Assignment-1"
+author: "va306"
+date: "2/05/2023"
+output: html_document
+---
+
+
+```{r}
+## Import csv file from dataset
+library(readr)
+Bumpus_sparrows <- read_csv("C:/Users/vidhi/Downloads/Bumpus_sparrows.csv")
+Bumpus_sparrows
+sparr <- Bumpus_sparrows
+sparr
+```
+## Survived Sparrow Matrix
+```{r}
+survived=subset(sparr,Survivorship=='S')
+survived
+
+# Removing the non-numeric values
+
+survived_num = survived[,-1]
+survived_num
+```
+## Colmeans Survivorship
+colMeans(survived_num)
+
+## Covariance Survivorship
+```{r}
+## Covariance Survivorship
+cov(survived_num)
+cods=cov(survived_num)
+cods
+```
+## Inference for Covariance Survivorship
+* The covariance between Alar_extent and Total_Length is the maximum in the matrix column i.e. 9.1. It is a positive covariance. As the total_length increases Alar_extent also increase.
+* The covariance between the L_hemerous and L_keel_sternum is the least. The covariance is very close to 0 and it can be inferred that there might be no relationship between L_hemerous and L_keel_sternum.
+
+## Corelation Survivorship
+```{r}
+## Correlation Survivorship
+cor(survived_num)
+```
+
+## Inference for Correlation Survivorship
+* The correlation is usually between -1 to 1. As seen from the matrix, we mostly have a positive correlation.
+* The maximum correlation is between the l_humerous and Alar_extent of approx 0.74.The survival chance are strongly dependednt on these 2 variables.
+
+
+## Non-Survived Sparrow Matrix
+
+```{r}
+N_survived=subset(sparr,Survivorship=='NS')
+N_survived
+
+### Removing the non-numeric values
+N_survived[,-1]
+N_survived_num = N_survived[,-1]
+```
+## Colmeans Survivorship
+colMeans(N_survived_num)
+
+## Covariance Non-Survivors
+```{r}
+cov_data=cov(N_survived_num)
+cov_data
+```
+
+## Inference for Covariance Non-Survivors
+*  We observe that the covariance is maximum between the Total_length and Alar_extent as we saw in the Survivorship too. Both variables must be increasing or decreasing to get a positive correlation.
+* Also, the least covariance is between the l_beak head and l_humerous.It's almost 0 and there is a possiblity of there being no relation between these variables.
+* From co-variance graph it can be inferred that Alar_extent plays an important role in deciding the Survivorship. The value is 32.55 for Non-Survivors and approximately 17.5 for Survivors. The Alar_extent should be smaller to survive.
+
+## Corelation Non-Survivors
+```{r}
+cor(N_survived_num)
+```
+## Inference for Correlation Survivorship
+* As all the values are positive, we can see there has no negative correlation.
+* The maximum is the correlation between the variables l_humerous and l_beak_head. The value shows it's a strong positive correlation.It's contrary to the the variables relation in covariance matrix.
+ 
+
+
+```{r}
+# Extra material for inference
+```
+
+
+
+
+# CONCLUSION with Comparing Total length
+```{r}
+library(ggplot2)
+ggplot(sparr,aes(x=Total_length, fill=Survivorship))+geom_bar()+theme_bw()+
+labs(title='Comparison-Length')
+```
+
+
+#Inference from the Total_length graph:
+
+* As the Total_length increases the chances of Sparrows Surviving is less as compared to birds with shorter length.
+
+# CONCLUSION with Comparing Alar_extent
+```{r}
+ggplot(sparr,aes(y=Alar_extent, fill=Survivorship))+geom_boxplot()+
+labs(title='Comparison')
+```
+
+#Inference from the Alar_extent graph:
+
+* For Alar_extent, if the median is above 242, the chances of sparrows surviving is more.
+
+
+
