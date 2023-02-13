@@ -39,12 +39,16 @@ ggplot(sparrows, aes(x=L_humerous,y=Alar_extent)) + facet_wrap(~Total_length) + 
 
 ```
 
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
+
 # Histogram
 
 ```{r}
 ggplot(sparrows, aes(Total_length))+geom_histogram(fill='pink', color='white',bins=10)
 ggplot(sparrows, aes(L_keel_sternum))+geom_histogram(aes(fill=after_stat(count)))
 ```
+
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
   
 # Bar chart
 ```{r}
@@ -53,11 +57,15 @@ ggplot(sparrows, aes(Survivorship))+ geom_bar(position="stack", fill='lightblue'
 ggplot(sparrows, aes(Alar_extent)) + facet_grid(.~Survivorship) + geom_bar(position="dodge",fill='lightblue')
 ```
 
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
+
 # Regression
 ```{r}
 ggplot(sparrows, aes(x=Total_length,y=L_beak_head))+geom_point()+ geom_smooth(method=lm,se= FALSE)
 ggplot(sparrows, aes(x=Total_length,y=L_humerous)) + geom_point() + stat_smooth()
 ```
+
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
 
 # Violin plot
 ```{r}
@@ -68,12 +76,15 @@ ggplot(sparrows, aes(x=Survivorship,y=Total_length)) + geom_violin()
 ggplot(sparrows, aes(x=Survivorship,y=L_keel_sternum)) + geom_violin()
 ```
 
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
+
 # box plot
 ```{r}
 ggplot(sparrows, aes(x=Survivorship,y=Total_length)) + geom_boxplot()
 ggplot(sparrows, aes(x=L_keel_sternum,y=Survivorship)) + geom_boxplot() + coord_flip()
 ```
 
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
 
 # density plot and ggridges
 ```{r}
@@ -91,11 +102,14 @@ ggplot(sparrows, aes(x=Alar_extent)) + geom_density(color='blue')
 ggplot(sparrows, aes(x=L_humerous, y=Survivorship)) + geom_density_ridges(color='black',fill='pink') 
 ```
 
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
 
 # hexbin
 ```{r}
 ggplot(sparrows, aes(x=Survivorship, y=Total_length)) + geom_hex()
 ```
+
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
 
 # with ggthemes (see also ggsci, ggthemr)
 ```{r}
@@ -109,6 +123,8 @@ lastplot + theme_fivethirtyeight()
 lastplot + theme_tufte()
 lastplot + theme_wsj()
 ```
+
+* Inference : We can see that in most of the plots that the outliers didn't survive and the survivors are converging towards the centre.
 
 
 
