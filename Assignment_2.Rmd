@@ -1,0 +1,115 @@
+---
+title: "Assignment_2"
+author: "vidhi.ambwani@rutgers.edu"
+date: "2/13/2023"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(lattice)
+library(ggridges)
+library(ggvis)
+library(ggthemes)
+library(cowplot)
+library(gapminder)
+library(gganimate)
+library(dplyr)
+library(tidyverse)
+library(grid)
+library(gridExtra)
+library(RColorBrewer)
+library(readr)
+sparrows <- read_csv("C:/Users/vidhi/Downloads/Bumpus_sparrows.csv")
+```
+
+sparrows
+
+# Scatter plot
+```{r}
+
+ggplot(sparrows, aes(x=L_beak_head,y=Alar_extent))+geom_point(aes(color=Survivorship)) 
+
+ggplot(sparrows, aes(x=L_beak_head,y=Alar_extent))+geom_point(aes(color=Total_length)) 
+
+ggplot(sparrows, aes(x=L_beak_head,y=Total_length)) + xlim(30,32) + geom_point(colour="blue",pch=12)
+
+ggplot(sparrows, aes(x=L_humerous,y=Alar_extent)) + facet_wrap(~Total_length) + geom_point(aes(color=Survivorship))
+
+
+```
+
+# Histogram
+
+```{r}
+ggplot(sparrows, aes(Total_length))+geom_histogram(fill='pink', color='white',bins=10)
+ggplot(sparrows, aes(L_keel_sternum))+geom_histogram(aes(fill=after_stat(count)))
+```
+  
+# Bar chart
+```{r}
+ggplot(sparrows, aes(x=Total_length, fill=Survivorship)) + geom_bar()+theme_bw()
+ggplot(sparrows, aes(Survivorship))+ geom_bar(position="stack", fill='lightblue') 
+ggplot(sparrows, aes(Alar_extent)) + facet_grid(.~Survivorship) + geom_bar(position="dodge",fill='lightblue')
+```
+
+# Regression
+```{r}
+ggplot(sparrows, aes(x=Total_length,y=L_beak_head))+geom_point()+ geom_smooth(method=lm,se= FALSE)
+ggplot(sparrows, aes(x=Total_length,y=L_humerous)) + geom_point() + stat_smooth()
+```
+
+# Violin plot
+```{r}
+ggplot(sparrows, aes(x=Survivorship,y=Alar_extent)) + geom_violin()
+ggplot(sparrows, aes(x=Survivorship,y=L_beak_head)) + geom_violin()
+ggplot(sparrows, aes(x=Survivorship,y=L_humerous)) + geom_violin()
+ggplot(sparrows, aes(x=Survivorship,y=Total_length)) + geom_violin()
+ggplot(sparrows, aes(x=Survivorship,y=L_keel_sternum)) + geom_violin()
+```
+
+# box plot
+```{r}
+ggplot(sparrows, aes(x=Survivorship,y=Total_length)) + geom_boxplot()
+ggplot(sparrows, aes(x=L_keel_sternum,y=Survivorship)) + geom_boxplot() + coord_flip()
+```
+
+
+# density plot and ggridges
+```{r}
+ggplot(sparrows, aes(x=Total_length)) + geom_density() 
+ggplot(sparrows, aes(x=Total_length, fill=Survivorship)) + geom_density() 
+
+ggplot(sparrows, aes(x=L_keel_sternum, fill=Survivorship)) + geom_density() 
+
+ggplot(sparrows, aes(x=Total_length, fill=Survivorship)) + geom_density(alpha=0.3, aes(y=after_stat(scaled))) 
+
+ggplot(sparrows, aes(x=Total_length, y=Survivorship)) + geom_density_ridges(color='black',fill='lightblue') 
+
+ggplot(sparrows, aes(x=Alar_extent)) + geom_density(color='blue') 
+
+ggplot(sparrows, aes(x=L_humerous, y=Survivorship)) + geom_density_ridges(color='black',fill='pink') 
+```
+
+
+# hexbin
+```{r}
+ggplot(sparrows, aes(x=Survivorship, y=Total_length)) + geom_hex()
+```
+
+# with ggthemes (see also ggsci, ggthemr)
+```{r}
+lastplot <- ggplot(sparrows, aes(x=Total_length, y=Alar_extent)) + xlim(150,170) + geom_point(aes(color=Survivorship)) + stat_smooth() + 
+  labs(x="Total Length", y="Alar Extent", title="Sparrow Data") 
+lastplot + theme_bw()
+lastplot + theme_cowplot()
+lastplot + theme_dark()
+lastplot + theme_economist()
+lastplot + theme_fivethirtyeight()
+lastplot + theme_tufte()
+lastplot + theme_wsj()
+```
+
+
+
+
